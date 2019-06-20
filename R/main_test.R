@@ -2,11 +2,20 @@
 
 main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict) {
   elts <- c()
-  for(i in 1:num_items_in_test){
-    elts <- c(elts, item_page(item_number = i,
-                              num_items_in_test = num_items_in_test,
-                              audio_dir = audio_dir,
-                              dict = dict))
+  item_bank <- EDT::EDT_item_bank
+  item_sequence <- sample(1:nrow(item_bank), num_items_in_test)
+  #browser()
+  for(i in 1:length(item_sequence)){
+    item <- EDT::EDT_item_bank[item_sequence[i],]
+    emotion <- psychTestR::i18n(item[1,]$emotion_i18)
+    item_page <-
+      EDT_item(label = item$item_number[1],
+               correct_answer = item$correct[1],
+               prompt = get_prompt(i, num_items_in_test, emotion),
+               audio_file = item$audio_file[1],
+               audio_dir = audio_dir,
+               save_answer = TRUE)
+    elts <- c(elts, item_page)
   }
   psychTestR::new_timeline({
     elts
@@ -14,10 +23,10 @@ main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict)
 }
 
 
-item_page <- function(item_number, num_items_in_test, audio_dir, dict = EDT::EDT_dict) {
-  item <- EDT::EDT_item_bank[item_number, ]
+item_page <- function(item_number, item_id, num_items_in_test, audio_dir, dict = EDT::EDT_dict) {
+  item <- EDT::EDT_item_bank %>% filter(item_number == item_id) %>% as.data.frame()
   emotion <- psychTestR::i18n(item[1,]$emotion_i18)
-  EDT_item(label = sprintf("%s-%s", item_number, num_items_in_test),
+  EDT_item(label = item_id,
            correct_answer = item$correct[1],
            prompt = get_prompt(item_number, num_items_in_test, emotion),
            audio_file = item$audio_file[1],
@@ -47,7 +56,7 @@ get_prompt <- function(item_number, num_items_in_test, emotion, dict = EDT::EDT_
     )
 }
 
-get_welcome_page <- function(dict = EDT::EDT_dict){
+EDT_welcome_page <- function(dict = EDT::EDT_dict){
   psychTestR::new_timeline(
     psychTestR::one_button_page(
     body = shiny::div(
@@ -59,7 +68,7 @@ get_welcome_page <- function(dict = EDT::EDT_dict){
   ), dict = dict)
 }
 
-get_final_page <- function(dict = EDT::EDT_dict){
+EDT_final_page <- function(dict = EDT::EDT_dict){
   psychTestR::new_timeline(
     psychTestR::final_page(
       body = shiny::div(

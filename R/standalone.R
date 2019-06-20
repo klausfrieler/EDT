@@ -46,14 +46,14 @@ EDT_standalone  <- function(title = NULL,
                              button_text = psychTestR::i18n("CONTINUE"),
                              validate = validate_id),
         dict = dict),
-    if(with_welcome) get_welcome_page(dict = dict),
+    if(with_welcome) EDT_welcome_page(dict = dict),
     EDT::EDT(num_items = num_items,
       with_welcome =  FALSE,
       feedback = feedback,
       dict = dict,
       ...),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
-    get_final_page(dict = EDT::EDT_dict)
+    EDT_final_page(dict = EDT::EDT_dict)
   )
   if(is.null(title)){
     #extract title as named vector from dictionary

@@ -111,7 +111,14 @@ audio_NAFC_page_flex <- function(label,
                  arrange_vertically = FALSE,
                  id = "response_ui")
     )
-  get_answer <- function(input, ...) as.numeric(gsub("answer", "", input$last_btn_pressed))
+  get_answer <- function(input, ...) {
+    answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
+    correct <- EDT::EDT_item_bank[EDT::EDT_item_bank == label,]$correct == answer
+    list(answer = answer,
+         label = label,
+         correct = correct)
+
+  }
   validate <- function(answer, ...) !is.null(answer)
   #printf("[audio_NAFC_page_with_img] left")
   psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,

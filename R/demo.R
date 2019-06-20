@@ -27,13 +27,13 @@ EDT_demo <- function(num_items = 3L,
                      language = "EN",
                      ...) {
   elts <- c(
-    get_welcome_page(dict = dict),
+    EDT_welcome_page(dict = dict),
     EDT::EDT(num_items = num_items,
              with_welcome = FALSE,
              feedback = feedback,
              dict = dict,
              ...),
-      get_final_page(dict = dict)
+      EDT_final_page(dict = dict)
   )
 
   psychTestR::make_test(

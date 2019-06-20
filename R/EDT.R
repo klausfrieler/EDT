@@ -79,7 +79,7 @@ EDT <- function(num_items = 18L,
 
   psychTestR::new_timeline({
     c(
-      if (with_welcome) get_welcome_page(),
+      if (with_welcome) EDT_welcome_page(),
       main_test(label = label, num_items_in_test = num_items, audio_dir = audio_dir, dict = dict),
       feedback
     )},
