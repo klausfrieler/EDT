@@ -1,18 +1,18 @@
-#' RAT feedback (with score)
+#' EDT feedback (with score)
 #'
 #' Here the participant is given textual feedback at the end of the test.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @export
 #' @examples
 #' \dontrun{
-#' RAT_demo(feedback = RAT_feedback_with_score())}
-RAT_feedback_with_score <- function(dict = RAT::RAT_dict) {
+#' EDT_demo(feedback = EDT_feedback_with_score())}
+EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
   psychTestR::new_timeline(
     c(
       psychTestR::reactive_page(function(state, ...) {
         results <- psychTestR::get_results(state = state, complete = TRUE, add_session_info = FALSE)
         #print(results)
-        results <- attr(as.list(results)$RAT$ability, "metadata")$results
+        results <- attr(as.list(results)$EDT$ability, "metadata")$results
         #print(results)
         sum_score <- sum(results$score)
         num_question <- nrow(results)
@@ -33,7 +33,7 @@ RAT_feedback_with_score <- function(dict = RAT::RAT_dict) {
 
 }
 
-RAT_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 160, x_mean = 100, x_sd = 15) {
+EDT_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 160, x_mean = 100, x_sd = 15) {
   q <-
     ggplot2::ggplot(data.frame(x = c(x_min, x_max)), ggplot2::aes(x)) +
     ggplot2::stat_function(fun = dnorm, args = list(mean = x_mean, sd = x_sd)) +
@@ -53,20 +53,20 @@ RAT_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 16
   q <- q + ggplot2::ggtitle(main_title)
   plotly::ggplotly(q, width = 600, height = 450)
 }
-#' RAT feedback (with graph)
+#' EDT feedback (with graph)
 #'
 #' Here the participant is given textual and graphical feedback at the end of the test.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @export
 #' @examples
 #' \dontrun{
-#' RAT_demo(feedback = RAT_feedback_with_score())}
-RAT_feedback_with_graph <- function(dict = RAT::RAT_dict) {
+#' EDT_demo(feedback = EDT_feedback_with_score())}
+EDT_feedback_with_graph <- function(dict = EDT::EDT_dict) {
   psychTestR::new_timeline(
     c(
       psychTestR::reactive_page(function(state, ...) {
         results <- psychTestR::get_results(state = state, complete = TRUE, add_session_info = FALSE)
-        results <- attr(as.list(results)$RAT$ability, "metadata")$results
+        results <- attr(as.list(results)$EDT$ability, "metadata")$results
         #print(results)
         #print(nrow(results))
 
@@ -78,7 +78,7 @@ RAT_feedback_with_graph <- function(dict = RAT::RAT_dict) {
         text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
                                         sub = list(num_question = num_question, num_correct = sum_score))
-        norm_plot <- RAT_feedback_graph_normal_curve(perc_correct)
+        norm_plot <- EDT_feedback_graph_normal_curve(perc_correct)
         psychTestR::page(
           ui = shiny::div(
             shiny::p(text_finish),

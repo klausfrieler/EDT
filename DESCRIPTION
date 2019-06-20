@@ -1,10 +1,10 @@
-Package: RAT
+Package: EDT
 Type: Package
-Title: Musical Rhythm Ability Test
+Title: Emotion Discrimination Test
 Version: 0.1.0
 Author: Klaus Frieler
 Maintainer: Klaus Frieler <kf@omniversum.de>
-Description: Implementation of a Musical Rhythm Ability Test
+Description: Implementation of a musical  emotion discrimination test
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

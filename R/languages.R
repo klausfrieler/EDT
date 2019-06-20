@@ -1,7 +1,7 @@
-#' RAT languages
+#' EDT languages
 #'
-#' Lists the languages available for RAT implementations.
+#' Lists the languages available for EDT implementations.
 #' @export
-RAT_languages <- function() {
+EDT_languages <- function() {
   c("EN", "DE")
 }

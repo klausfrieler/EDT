@@ -1,3 +1,3 @@
-# RAT 0.1.0
+# EDT 0.1.0
 
 * First release

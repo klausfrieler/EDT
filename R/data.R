@@ -1,20 +1,14 @@
-#' RAT  dictionary
+#' EDT  dictionary
 #'
-#' The default internationalisation dictionary used by the RAT.
-#' @name RAT_dict
+#' The default internationalisation dictionary used by the EDT.
+#' @name EDT_dict
 #' @docType data
 NULL
 
-#' RAT item bank
+#' EDT item bank
 #'
-#' The RAT's item bank
-#' @name RAT_item_bank
+#' The EDT's item bank
+#' @name EDT_item_bank
 #' @docType data
 NULL
 
-#' RAT lures bank
-#'
-#' The RAT's lures  bank
-#' @name RAT_lures_bank
-#' @docType data
-NULL
