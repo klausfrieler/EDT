@@ -136,7 +136,7 @@ EDT_item <- function(label = "",
                      ){
 
   page_prompt <- shiny::div(prompt)
-  #printf("EDT item_called for pattern %s", pattern)
+  #printf("EDT item_called for  %s", label)
 
   choices <- c("1", "2")
   audio_url <- file.path(audio_dir, audio_file)

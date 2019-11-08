@@ -26,7 +26,7 @@ EDT_demo <- function(num_items = 3L,
                      dict = EDT::EDT_dict,
                      language = "EN",
                      ...) {
-  elts <- c(
+  elts <- psychTestR::join(
     EDT_welcome_page(dict = dict),
     EDT::EDT(num_items = num_items,
              with_welcome = FALSE,

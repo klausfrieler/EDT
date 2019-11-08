@@ -39,7 +39,7 @@ EDT_standalone  <- function(title = NULL,
   if(with_feedback) {
     feedback <- EDT_feedback_with_graph()
   }
-  elts <- c(
+  elts <- psychTestR::join(
     if(with_id)
       psychTestR::new_timeline(
         psychTestR::get_p_id(prompt = psychTestR::i18n("ENTER_ID"),
@@ -53,7 +53,7 @@ EDT_standalone  <- function(title = NULL,
       dict = dict,
       ...),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
-    EDT_final_page(dict = EDT::EDT_dict)
+    EDT_final_page(dict = dict)
   )
   if(is.null(title)){
     #extract title as named vector from dictionary

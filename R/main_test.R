@@ -8,6 +8,7 @@ main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict)
   for(i in 1:length(item_sequence)){
     item <- EDT::EDT_item_bank[item_sequence[i],]
     emotion <- psychTestR::i18n(item[1,]$emotion_i18)
+    #printf("Emotion %s ", emotion)
     item_page <-
       EDT_item(label = item$item_number[1],
                correct_answer = item$correct[1],
@@ -17,9 +18,10 @@ main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict)
                save_answer = TRUE)
     elts <- c(elts, item_page)
   }
-  psychTestR::new_timeline({
-    elts
-  }, dict = dict)
+  #psychTestR::new_timeline({
+  #  elts
+  #}, dict = dict)
+  elts
 }
 
 
