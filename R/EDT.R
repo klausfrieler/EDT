@@ -67,7 +67,7 @@ EDT <- function(num_items = 18L,
                 label = "EDT",
                 feedback = EDT_feedback_with_score(),
                 dict = EDT::EDT_dict) {
-  audio_dir <- "http://media.gold-msi.org/test_materials/EDT"
+  audio_dir <- "https://media.gold-msi.org/test_materials/EDT"
   stopifnot(purrr::is_scalar_character(label),
             purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_character(audio_dir),
