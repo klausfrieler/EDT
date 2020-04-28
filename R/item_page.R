@@ -100,7 +100,7 @@ audio_NAFC_page_flex <- function(label,
   #audio_ui <- get_audio_ui(audio_url, wait = T, loop = F)
   audio_ui <- get_audio_ui(audio_url, wait = T, loop = F, width = 200)
   #audio_ui <- get_audio_element(audio_url, autoplay = T, wait = T, width = 50)
-  #browser()
+
   style <- NULL
   ui <- shiny::div(
     tagify(prompt),
@@ -112,8 +112,9 @@ audio_NAFC_page_flex <- function(label,
                  id = "response_ui")
     )
   get_answer <- function(input, ...) {
+    browser()
     answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-    correct <- EDT::EDT_item_bank[EDT::EDT_item_bank == label,]$correct == answer
+    correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
     list(answer = answer,
          label = label,
          correct = correct)
