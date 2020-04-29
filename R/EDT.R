@@ -78,10 +78,12 @@ EDT <- function(num_items = 18L,
   audio_dir <- gsub("/$", "", audio_dir)
 
   psychTestR::join(
+    psychTestR::begin_module(label),
     if (with_welcome) EDT_welcome_page(),
     psychTestR::new_timeline({
       main_test(label = label, num_items_in_test = num_items, audio_dir = audio_dir, dict = dict)
     }, dict = dict),
 
-    feedback)
+    feedback,
+    psychTestR::end_module())
 }
