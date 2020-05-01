@@ -64,6 +64,7 @@ source("R/utils.R")
 #' @export
 EDT <- function(num_items = 18L,
                 with_welcome = TRUE,
+                with_finish = TRUE,
                 label = "EDT",
                 feedback = EDT_feedback_with_score(),
                 dict = EDT::EDT_dict) {
@@ -85,5 +86,6 @@ EDT <- function(num_items = 18L,
     }, dict = dict),
 
     feedback,
+    if(with_finish) EDT_finished_page(),
     psychTestR::end_module())
 }
