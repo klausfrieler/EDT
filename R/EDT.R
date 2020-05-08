@@ -84,7 +84,8 @@ EDT <- function(num_items = 18L,
     psychTestR::new_timeline({
       main_test(label = label, num_items_in_test = num_items, audio_dir = audio_dir, dict = dict)
     }, dict = dict),
-
+    scoring(),
+    psychTestR::elt_save_results_to_disk(complete = TRUE),
     feedback,
     if(with_finish) EDT_finished_page(),
     psychTestR::end_module())

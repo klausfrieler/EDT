@@ -1,4 +1,25 @@
 
+scoring <- function(){
+  psychTestR::code_block(function(state,...){
+    #browser()
+    results <- psychTestR::get_results(state = state,
+                                       complete = FALSE,
+                                       add_session_info = FALSE) %>% as.list()
+
+    sum_score <- sum(purrr::map_lgl(results$EDT, function(x) x$correct))
+    num_question <- length(results$EDT)
+    perc_correct <- sum_score/num_question
+    psychTestR::save_result(place = state,
+                 label = "score",
+                 value = perc_correct)
+    psychTestR::save_result(place = state,
+                             label = "num_questions",
+                             value = num_question)
+
+  })
+
+}
+
 
 main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict) {
   elts <- c()
@@ -16,11 +37,8 @@ main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict)
                audio_file = item$audio_file[1],
                audio_dir = audio_dir,
                save_answer = TRUE)
-    elts <- c(elts, item_page)
+    elts <- psychTestR::join(elts, item_page)
   }
-  #psychTestR::new_timeline({
-  #  elts
-  #}, dict = dict)
   elts
 }
 

@@ -37,7 +37,8 @@ EDT_standalone  <- function(title = NULL,
                            ...) {
   feedback <- NULL
   if(with_feedback) {
-    feedback <- EDT_feedback_with_graph()
+    feedback <- EDT::EDT_feedback_with_graph()
+    #feedback <- EDT::EDT_feedback_with_score()
   }
   elts <- psychTestR::join(
     if(with_id)
