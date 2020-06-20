@@ -79,7 +79,7 @@ and downloading your data.
 For more details on the psychTestR interface, 
 see http://psychtestr.com/.
 
-The EDT currently supports English (EN) and  German (DE).
+The EDT currently supports English (EN), German (DE), and Russian (RU).
 You can select one of these languages by passing a language code as 
 an argument to `EDT_standalone()`, e.g. `EDT_standalone(languages = "DE")`,
 or alternatively by passing it as a URL parameter to the test browser,
