@@ -1,6 +1,5 @@
-# Emotion Discrimation Test (EDT)
+# Emotion Discrimination Test (EDT)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1415363.svg)](https://doi.org/10.5281/zenodo.1415363)
 
 The EDT is an non-adaptive test for recognition of emotional interpretation of simple melodies.
 
