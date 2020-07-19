@@ -18,7 +18,7 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
         #messagef("Sum scores: %d, total items: %d", sum_score, num_question)
 
         num_correct <- round(results$EDT$score * results$EDT$num_questions)
-        text_finish <- psychTestR::i18n("FEEDBACK",
+        text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
                                         sub = list(num_question = results$EDT$num_question,
                                                    num_correct = num_correct))
@@ -74,7 +74,7 @@ EDT_feedback_with_graph <- function(dict = EDT::EDT_dict) {
         #perc_correct <- sum_score/num_question
         #printf("Sum scores: %d, total items: %d perc_correct: %.2f", sum_score, num_question, perc_correct)
         num_correct <- round(results$EDT$score * results$EDT$num_questions)
-        text_finish <- psychTestR::i18n("FEEDBACK",
+        text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
                                         sub = list(num_question = results$EDT$num_questions,
                                                    num_correct = num_correct))
@@ -82,7 +82,8 @@ EDT_feedback_with_graph <- function(dict = EDT::EDT_dict) {
         psychTestR::page(
           ui = shiny::div(
             shiny::p(text_finish),
-            shiny::p(norm_plot)
+            shiny::p(norm_plot),
+            shiny::p(psychTestR::trigger_button("next", psychTestR::i18n("CONTINUE")))
           )
         )
       }
