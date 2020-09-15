@@ -24,7 +24,7 @@ EDT_demo <- function(num_items = 3L,
                      admin_password = "demo",
                      researcher_email = "longgold@gold.uc.ak",
                      dict = EDT::EDT_dict,
-                     language = "EN",
+                     language = "en",
                      ...) {
   elts <- psychTestR::join(
     EDT_welcome_page(dict = dict),
@@ -42,5 +42,5 @@ EDT_demo <- function(num_items = 3L,
                                    admin_password = admin_password,
                                    researcher_email = researcher_email,
                                    demo = TRUE,
-                                   languages = language))
+                                   languages = tolower(language)))
 }

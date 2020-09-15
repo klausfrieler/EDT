@@ -48,7 +48,7 @@ library(EDT)
 EDT_demo()
 
 # Run a demo test, skipping the training phase, and only asking 5 questions, as well a changinge the language
-EDT_demo(num_items = 5, take_training = FALSE, language = "DE")
+EDT_demo(num_items = 5, take_training = FALSE, language = "de")
 ```
 
 ### Testing a participant
@@ -80,7 +80,7 @@ see http://psychtestr.com/.
 
 The EDT currently supports English (EN), German (DE), and Russian (RU).
 You can select one of these languages by passing a language code as 
-an argument to `EDT_standalone()`, e.g. `EDT_standalone(languages = "DE")`,
+an argument to `EDT_standalone()`, e.g. `EDT_standalone(languages = "de")`,
 or alternatively by passing it as a URL parameter to the test browser,
 eg. http://127.0.0.1:4412/?language=DE (note that the `p_id` argument must be empty).
 
