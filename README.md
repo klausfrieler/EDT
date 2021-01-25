@@ -7,16 +7,15 @@ The EDT is an non-adaptive test for recognition of emotional interpretation of s
 ## Citation
 
 We also advise mentioning the software versions you used,
-in particular the versions of the `EDT`, `psychTestR`, and `psychTestRCAT` packages.
+in particular the versions of the `EDT` and `psychTestR` packages.
 You can find these version numbers from R by running the following commands:
 
 ``` r
 library(EDT)
 library(psychTestR)
-library(psychTestRCAT)
 if (!require(devtools)) install.packages("devtools")
 x <- devtools::session_info()
-x$packages[x$packages$package %in% c("EDT", "psychTestR", "psychTestRCAT"), ]
+x$packages[x$packages$package %in% c("EDT", "psychTestR"), ]
 ```
 
 ## Installation instructions (local use)

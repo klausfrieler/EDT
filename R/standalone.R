@@ -1,4 +1,4 @@
-source("R/EDT.R")
+#source("R/EDT.R")
 options(shiny.error = browser)
 debug_locally <- !grepl("shiny-server", getwd())
 
@@ -9,7 +9,9 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' This can be used for data collection, either in the laboratory or online.
 #' @param title (Scalar character) Title to display during testing.
 #' @param num_items (Scalar integer) Number of items to be adminstered.
+#' @param with_id (Scalar boolean) Indicates, if ID should be asked for. Defaults to TRUE
 #' @param with_feedback (Scalar boolean) Indicates if performance feedback will be given at the end of the test. Defaults to  FALSE
+#' @param with_welcome (Scalar boolean) Indicates, if a welcome page shall be displayed.  Defaults to  TRUE
 #' @param admin_password (Scalar character) Password for accessing the admin panel.
 #' @param researcher_email (Scalar character)
 #' If not \code{NULL}, this researcher's email address is displayed
@@ -17,7 +19,7 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param languages (Character vector)
 #' Determines the languages available to participants.
 #' Possible languages include English (\code{"en"}),
-#' German (\code{"de"}), and Russian (\code{"ru"}).
+#' German (\code{"de"}),  Russian (\code{"ru"}), and Nederlands (\code{"nl"}).
 #' The first language is selected by default
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @param validate_id (Character scalar or closure) Function for validating IDs or string "auto" for default validation
@@ -31,7 +33,7 @@ EDT_standalone  <- function(title = NULL,
                            with_welcome = TRUE,
                            admin_password = "conifer",
                            researcher_email = "longgold@gold.uc.ak",
-                           languages = c("en", "de", "ru"),
+                           languages = c("en", "de", "ru", "nl"),
                            dict = EDT::EDT_dict,
                            validate_id = "auto",
                            ...) {
@@ -50,6 +52,7 @@ EDT_standalone  <- function(title = NULL,
     if(with_welcome) EDT_welcome_page(dict = dict),
     EDT::EDT(num_items = num_items,
       with_welcome =  FALSE,
+      with_finish = FALSE,
       feedback = feedback,
       dict = dict,
       ...),

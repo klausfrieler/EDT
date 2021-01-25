@@ -36,8 +36,8 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
 EDT_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 160, x_mean = 100, x_sd = 15) {
   q <-
     ggplot2::ggplot(data.frame(x = c(x_min, x_max)), ggplot2::aes(x)) +
-    ggplot2::stat_function(fun = dnorm, args = list(mean = x_mean, sd = x_sd)) +
-    ggplot2::stat_function(fun = dnorm, args=list(mean = x_mean, sd = x_sd),
+    ggplot2::stat_function(fun = stats::dnorm, args = list(mean = x_mean, sd = x_sd)) +
+    ggplot2::stat_function(fun = stats::dnorm, args=list(mean = x_mean, sd = x_sd),
                            xlim = c(x_min, (x_max - x_min) * perc_correct + x_min),
                            fill = "lightblue4",
                            geom = "area")

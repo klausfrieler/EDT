@@ -91,11 +91,11 @@ EDT_welcome_page <- function(dict = EDT::EDT_dict){
 EDT_finished_page <- function(dict = EDT::EDT_dict){
   psychTestR::new_timeline(
     psychTestR::one_button_page(
-      body = shiny::div(
-        shiny::div(psychTestR::i18n("SUCCESS"),
-                   style = "margin-left:0%;display:block"),
-        button_text = psychTestR::i18n("CONTINUE")
-      )
+      body =  shiny::div(
+        shiny::h4(psychTestR::i18n("THANKS")),
+        psychTestR::i18n("SUCCESS"),
+                         style = "margin-left:0%;display:block"),
+      button_text = psychTestR::i18n("CONTINUE")
     ), dict = dict)
 }
 EDT_final_page <- function(dict = EDT::EDT_dict){
@@ -104,7 +104,8 @@ EDT_final_page <- function(dict = EDT::EDT_dict){
       body = shiny::div(
         shiny::h4(psychTestR::i18n("THANKS")),
         shiny::div(psychTestR::i18n("SUCCESS"),
-                   style = "margin-left:0%;display:block")
+                   style = "margin-left:0%;display:block"),
+        button_text = psychTestR::i18n("CONTINUE")
       )
     ), dict = dict)
 }
