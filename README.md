@@ -46,8 +46,8 @@ library(EDT)
 # and not saving your data
 EDT_demo()
 
-# Run a demo test, skipping the training phase, and only asking 5 questions, as well a changinge the language
-EDT_demo(num_items = 5, take_training = FALSE, language = "de")
+# Run a demo test, skipping the training phase, and only asking 5 questions, as well a changing the language
+EDT_demo(num_items = 5, language = "en")
 ```
 
 ### Testing a participant

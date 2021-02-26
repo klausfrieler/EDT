@@ -1,6 +1,6 @@
 #' Demo EDT
 #'
-#' This function launches a demo for the RAT.
+#' This function launches a demo for the EDT.
 #'
 #' @param num_items (Integer scalar) Number of items in the test.
 #' @param feedback (Function) Defines the feedback to give the participant
@@ -10,7 +10,7 @@
 #' @param researcher_email (Scalar character)
 #' If not \code{NULL}, this researcher's email address is displayed
 #' at the bottom of the screen so that online participants can ask for help.
-#' Defaults to \email{longgold@gold.uc.ak},
+#' Defaults to \email{longgoldstudy@gmail.com},
 #' the email address of this package's developer.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @param language The language you want to run your demo in.
@@ -22,7 +22,7 @@
 EDT_demo <- function(num_items = 3L,
                      feedback = EDT::EDT_feedback_with_score(),
                      admin_password = "demo",
-                     researcher_email = "longgold@gold.uc.ak",
+                     researcher_email = "longgoldstudy@gmail.com",
                      dict = EDT::EDT_dict,
                      language = "en",
                      ...) {

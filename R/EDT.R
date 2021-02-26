@@ -1,6 +1,6 @@
 library(tidyverse)
 library(psychTestR)
-
+library(psychTestRCAT)
 
 #printf   <- function(...) print(sprintf(...))
 #messagef <- function(...) message(sprintf(...))
@@ -23,15 +23,24 @@ library(psychTestR)
 #' at the end of the test.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @export
-EDT <- function(num_items = 18L,
+
+EDT <- function(num_items_in_test = 18L,
                 with_welcome = TRUE,
                 with_finish = TRUE,
                 label = "EDT",
                 feedback = EDT_feedback_with_score(),
-                dict = EDT::EDT_dict) {
+                dict = EDT::EDT_dict,
+                adaptive = TRUE,
+                next_item.criterion = "bOpt",
+                next_item.estimator = "BM",
+                next_item.prior_dist = "norm",
+                next_item.prior_par = c(0, 1),
+                final_ability.estimator = "WL",
+                constrain_answers = FALSE
+                ) {
   audio_dir <- "https://media.gold-msi.org/test_materials/EDT"
   stopifnot(purrr::is_scalar_character(label),
-            purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
+            purrr::is_scalar_integer(num_items_in_test) || purrr::is_scalar_double(num_items_in_test),
             purrr::is_scalar_character(audio_dir),
             psychTestR::is.timeline(feedback) ||
               is.list(feedback) ||
@@ -42,10 +51,21 @@ EDT <- function(num_items = 18L,
   psychTestR::join(
     psychTestR::begin_module(label),
     if (with_welcome) EDT_welcome_page(),
-    psychTestR::new_timeline({
-      main_test(label = label, num_items_in_test = num_items, audio_dir = audio_dir, dict = dict)
-    }, dict = dict),
-    scoring(),
+    psychTestR::new_timeline(
+      main_test(label = label,
+                num_items_in_test = num_items_in_test,
+                audio_dir = audio_dir,
+                dict = dict,
+                next_item.criterion = next_item.criterion,
+                next_item.estimator = next_item.estimator,
+                next_item.prior_dist = next_item.prior_dist,
+                next_item.prior_par = next_item.prior_par,
+                final_ability.estimator = final_ability.estimator,
+                constrain_answers = constrain_answers,
+                adaptive = adaptive
+                ),
+      dict = dict),
+    if (!adaptive) scoring(),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
     feedback,
     if(with_finish) EDT_finished_page(),

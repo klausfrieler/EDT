@@ -20,30 +20,62 @@ scoring <- function(){
 
 }
 
-
-main_test <- function(label, num_items_in_test, audio_dir, dict = EDT::EDT_dict) {
-  elts <- c()
-  item_bank <- EDT::EDT_item_bank
-  item_sequence <- sample(1:nrow(item_bank), num_items_in_test)
-  #browser()
-  for(i in 1:length(item_sequence)){
-    item <- EDT::EDT_item_bank[item_sequence[i],]
-    emotion <- psychTestR::i18n(item[1,]$emotion_i18)
-    #printf("Emotion %s ", emotion)
-    item_page <-
-      EDT_item(label = item$item_number[1],
-               correct_answer = item$correct[1],
-               prompt = get_prompt(i, num_items_in_test, emotion),
-               audio_file = item$audio_file[1],
-               audio_dir = audio_dir,
-               save_answer = TRUE)
-    elts <- psychTestR::join(elts, item_page)
-  }
-  elts
+get_eligible_first_items_EDT <- function(){
+ which(EDT::EDT2_item_bank$difficulty >= -sd(EDT::EDT2_item_bank$difficulty)  &
+         EDT::EDT2_item_bank$difficulty <= sd(EDT::EDT2_item_bank$difficulty))
 }
 
 
-item_page <- function(item_number, item_id, num_items_in_test, audio_dir, dict = EDT::EDT_dict) {
+main_test <- function(label,
+                      num_items_in_test,
+                      audio_dir,
+                      dict = EDT::EDT_dict,
+                      adaptive = TRUE,
+                      next_item.criterion,
+                      next_item.estimator,
+                      next_item.prior_dist,
+                      next_item.prior_par,
+                      final_ability.estimator,
+                      constrain_answers, ...) {
+  if(adaptive) {
+    item_bank <- EDT::EDT2_item_bank
+    psychTestRCAT::adapt_test(
+      label = label,
+      item_bank = item_bank,
+      show_item = show_item(audio_dir),
+      stopping_rule = psychTestRCAT::stopping_rule.num_items(n = num_items_in_test),
+      opt = EDT_options(next_item.criterion = next_item.criterion,
+                        next_item.estimator = next_item.estimator,
+                        next_item.prior_dist = next_item.prior_dist,
+                        next_item.prior_par = next_item.prior_par,
+                        final_ability.estimator = final_ability.estimator,
+                        constrain_answers = constrain_answers,
+                        eligible_first_items = get_eligible_first_items_EDT(),
+                        item_bank = item_bank)
+    )
+  } else {
+    elts <- c()
+    item_bank <- EDT::EDT_item_bank
+    item_sequence <- sample(1:nrow(item_bank), num_items_in_test)
+    for(i in 1:length(item_sequence)){
+      item <- EDT::EDT_item_bank[item_sequence[i],]
+      emotion <- psychTestR::i18n(item[1,]$emotion_i18)
+      item_page <-
+        EDT_item(label = item$item_number[1],
+                 correct_answer = item$correct[1],
+                 prompt = get_prompt(i, num_items_in_test, emotion),
+                 audio_file = item$audio_file[1],
+                 audio_dir = audio_dir,
+                 save_answer = TRUE,
+                 adaptive = adaptive)
+      elts <- psychTestR::join(elts, item_page)
+    }
+    elts
+  }
+}
+
+item_page <- function(item_number, item_id, num_items_in_test, audio_dir,
+                      dict = EDT::EDT_dict) {
   item <- EDT::EDT_item_bank %>% filter(item_number == item_id) %>% as.data.frame()
   emotion <- psychTestR::i18n(item[1,]$emotion_i18)
   EDT_item(label = item_id,
@@ -56,9 +88,10 @@ item_page <- function(item_number, item_id, num_items_in_test, audio_dir, dict =
   #                promp = get_prompt(item_number, num_items_in_test, emotion),
   #                choices = c("1", "2"),
   #                url = file.path(audio_dir, item$audio_file[1]))
-}
+} # Is this function used anywhere? NR
 
-get_prompt <- function(item_number, num_items_in_test, emotion, dict = EDT::EDT_dict) {
+get_prompt <- function(item_number, num_items_in_test, emotion,
+                       dict = EDT::EDT_dict) {
   shiny::div(
     shiny::h4(
       psychTestR::i18n(
@@ -98,6 +131,7 @@ EDT_finished_page <- function(dict = EDT::EDT_dict){
       button_text = psychTestR::i18n("CONTINUE")
     ), dict = dict)
 }
+
 EDT_final_page <- function(dict = EDT::EDT_dict){
   psychTestR::new_timeline(
     psychTestR::final_page(
@@ -108,4 +142,27 @@ EDT_final_page <- function(dict = EDT::EDT_dict){
         button_text = psychTestR::i18n("CONTINUE")
       )
     ), dict = dict)
+}
+
+show_item <- function(audio_dir) {
+  function(item, ...) {
+    #stopifnot(is(item, "item"), nrow(item) == 1L)
+    item_number <- psychTestRCAT::get_item_number(item)
+    num_items_in_test <- psychTestRCAT::get_num_items_in_test(item)
+    emotion <- psychTestR::i18n(item[1,]$emotion_i18)
+    messagef("Showing item %s", item_number)
+    EDT_item(
+      label = paste0("q", item_number),
+      emotion = emotion,
+      audio_file = item$audio_file,
+      correct_answer = item$answer,
+      adaptive = TRUE,
+      prompt = get_prompt(item_number, num_items_in_test, emotion),
+      audio_dir = audio_dir,
+      save_answer = TRUE,
+      get_answer = NULL,
+      on_complete = NULL,
+      instruction_page = FALSE
+    )
+  }
 }

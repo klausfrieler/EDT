@@ -26,16 +26,18 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' which means ID should consist only of  alphanumeric characters.
 #' @param ... Further arguments to be passed to \code{\link{EDT}()}.
 #' @export
+
 EDT_standalone  <- function(title = NULL,
                            num_items = 18L,
                            with_id = TRUE,
                            with_feedback = FALSE,
                            with_welcome = TRUE,
                            admin_password = "conifer",
-                           researcher_email = "longgold@gold.uc.ak",
+                           researcher_email = "longgoldstudy@gmail.com",
                            languages = c("en", "de", "ru", "nl"),
                            dict = EDT::EDT_dict,
                            validate_id = "auto",
+                           adaptive = TRUE,
                            ...) {
   feedback <- NULL
   if(with_feedback) {
