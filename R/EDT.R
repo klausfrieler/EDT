@@ -21,6 +21,8 @@ library(psychTestRCAT)
 #' @param label (Character scalar) Label to give the EDT results in the output file.
 #' @param feedback (Function) Defines the feedback to give the participant
 #' at the end of the test.
+#' @param adaptive (Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
+#' or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @export
 

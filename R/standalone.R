@@ -24,6 +24,8 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @param validate_id (Character scalar or closure) Function for validating IDs or string "auto" for default validation
 #' which means ID should consist only of  alphanumeric characters.
+#' @param adaptive (Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
+#' or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.
 #' @param ... Further arguments to be passed to \code{\link{EDT}()}.
 #' @export
 

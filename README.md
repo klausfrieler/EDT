@@ -1,7 +1,7 @@
-# Emotion Discrimination Test (EDT)
+# Emotion Discrimination Test (EDT2)
 
 
-The EDT is an non-adaptive test for recognition of emotional interpretation of simple melodies.
+The EDT2 is an adaptive test for recognition of emotional interpretation of simple melodies. The EDT is the non-adaptive version which can still be used, but we highly encourage to use the new EDT2.
 
 
 ## Citation
