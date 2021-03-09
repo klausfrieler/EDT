@@ -16,8 +16,9 @@ library(psychTestRCAT)
 #' For a standalone implementation of the EDT,
 #' consider using \code{\link{EDT_standalone}()}.
 #' @param num_items (Integer scalar) Number of items in the test.
-#' @param with_welcome (Scalar boolean) Indicates, if a welcome page shall be displayed. Defaults to  TRUE
-#' @param with_finish (Scalar boolean) Indicates, if a finish (not final!) page shall be displayed. Defaults to  TRUE
+#' @param with_welcome (Scalar boolean) Indicates, if a welcome page shall be displayed. Defaults to TRUE
+#' @param take_training (Logical scalar) Whether to include the training phase. Defaults to FALSE
+#' @param with_finish (Scalar boolean) Indicates, if a finish (not final!) page shall be displayed. Defaults to TRUE
 #' @param label (Character scalar) Label to give the EDT results in the output file.
 #' @param feedback (Function) Defines the feedback to give the participant
 #' at the end of the test.
@@ -28,6 +29,7 @@ library(psychTestRCAT)
 
 EDT <- function(num_items_in_test = 18L,
                 with_welcome = TRUE,
+                take_training = FALSE,
                 with_finish = TRUE,
                 label = "EDT",
                 feedback = EDT_feedback_with_score(),
@@ -53,6 +55,8 @@ EDT <- function(num_items_in_test = 18L,
   psychTestR::join(
     psychTestR::begin_module(label),
     if (with_welcome) EDT_welcome_page(),
+    if (take_training) psychTestR::new_timeline(instructions(audio_dir),
+                                                dict = dict),
     psychTestR::new_timeline(
       main_test(label = label,
                 num_items_in_test = num_items_in_test,

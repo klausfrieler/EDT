@@ -93,16 +93,14 @@ audio_NAFC_page_flex <- function(label,
                                  prompt,
                                  choices,
                                  audio_url,
+                                 correct_answer = correct_answer,
                                  adaptive = adaptive,
                                  save_answer = TRUE,
                                  get_answer = NULL,
                                  on_complete = NULL,
                                  admin_ui = NULL) {
   stopifnot(purrr::is_scalar_character(label))
-  #audio_ui <- get_audio_ui(audio_url, wait = T, loop = F)
   audio_ui <- get_audio_ui(audio_url, wait = T, loop = F, width = 200)
-  #audio_ui <- get_audio_element(audio_url, autoplay = T, wait = T, width = 50)
-
   style <- NULL
   ui <- shiny::div(
     tagify(prompt),
@@ -118,9 +116,8 @@ audio_NAFC_page_flex <- function(label,
   get_answer <- function(input, ...) {
     answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
   }
-      validate <- function(answer, ...) !is.null(answer)
-      #printf("[audio_NAFC_page_with_img] left")
-      psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,
+  validate <- function(answer, ...) !is.null(answer)
+  psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,
                      validate = validate, on_complete = on_complete, final = FALSE,
                      admin_ui = admin_ui)
     }
@@ -147,8 +144,8 @@ EDT_item <- function(label = "",
                      get_answer = NULL,
                      instruction_page = FALSE
                      ){
+
   page_prompt <- shiny::div(prompt)
-  #printf("EDT item_called for  %s", label)
 
   choices <- c("1", "2")
   audio_url <- file.path(audio_dir, audio_file)
@@ -156,6 +153,7 @@ EDT_item <- function(label = "",
                        prompt = page_prompt,
                        audio_url = audio_url,
                        choices = choices,
+                       correct_answer = correct_answer,
                        save_answer = save_answer,
                        get_answer = get_answer,
                        on_complete = on_complete,
