@@ -54,9 +54,9 @@ EDT <- function(num_items_in_test = 18L,
 
   psychTestR::join(
     psychTestR::begin_module(label),
-    if (with_welcome) EDT_welcome_page(),
     if (take_training) psychTestR::new_timeline(instructions(audio_dir),
                                                 dict = dict),
+    if (with_welcome) EDT_welcome_page(),
     psychTestR::new_timeline(
       main_test(label = label,
                 num_items_in_test = num_items_in_test,

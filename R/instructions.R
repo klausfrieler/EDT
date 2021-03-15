@@ -11,6 +11,7 @@ instructions <- function(audio_dir) {
     }),
     info_page("INSTRUCTIONS"),
     show_sample_page(audio_dir),
+    show_second_sample_page(audio_dir),
     psychTestR::while_loop(
       test = function(state, ...) psychTestR::get_local("do_intro", state),
       logic = practice(audio_dir)
@@ -26,6 +27,22 @@ show_sample_page <- function(audio_dir){
   audio <- get_audio_element(url = audio_url, autoplay = F)
   body <- shiny::div(
     shiny::div(psychTestR::i18n("SAMPLE1a"),
+               style = "text-align: justify; margin-left:20%; margin-right:20%"),
+    shiny::p(audio)
+  )
+  psychTestR::one_button_page(
+    body = body,
+    button_text = psychTestR::i18n("CONTINUE")
+  )
+
+}
+
+show_second_sample_page <- function(audio_dir){
+  demo_sample <- "Demo-1"
+  audio_url <- file.path(audio_dir, sprintf("%s.mp3", demo_sample))
+  audio <- get_audio_element(url = audio_url, autoplay = F)
+  body <- shiny::div(
+    shiny::div(psychTestR::i18n("SAMPLE1b"),
                style = "text-align: justify; margin-left:20%; margin-right:20%"),
     shiny::p(audio)
   )
