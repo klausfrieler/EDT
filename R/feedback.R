@@ -17,10 +17,17 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
         #num_question <- length(results[[1]])
         #messagef("Sum scores: %d, total items: %d", sum_score, num_question)
 
-        num_correct <- round(results$EDT$score * results$EDT$num_questions)
+        if (is.null(results$EDT$score)) {
+          num_correct <- sum(attr(results$EDT$ability, "metadata")$results$score)
+          num_question <- results$EDT$num_question
+        }
+        else {
+          num_correct <- round(results$EDT$score * results$EDT$num_questions)
+          num_question <- nrow(results)
+        }
         text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
-                                        sub = list(num_question = results$EDT$num_question,
+                                        sub = list(num_question = num_question,
                                                    num_correct = num_correct))
         psychTestR::page(
           ui = shiny::div(
@@ -71,10 +78,17 @@ EDT_feedback_with_graph <- function(dict = EDT::EDT_dict) {
 
         #sum_score <- sum(purrr::map_lgl(results[[1]], function(x) x$correct))
         #printf("Sum scores: %d, total items: %d perc_correct: %.2f", sum_score, num_question, perc_correct)
-        num_question <- nrow(results)
-        if (is.null(results$EDT$score)) num_correct <- (results$EDT$ability + 4)/8
-        else num_correct <- round(results$EDT$score * results$EDT$num_questions)
-        perc_correct <- num_correct/num_question
+
+        if (is.null(results$EDT$score)) {
+          num_correct <- sum(attr(results$EDT$ability, "metadata")$results$score)
+          num_question <- results$EDT$num_question
+          perc_correct <- (results$EDT$ability+4)/8
+        }
+        else {
+          num_correct <- round(results$EDT$score * results$EDT$num_questions)
+          num_question <- nrow(results)
+          perc_correct <- num_correct/num_question
+        }
         text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
                                         sub = list(num_question = num_question,
