@@ -1,16 +1,17 @@
 Package: EDT
 Type: Package
 Title: Emotion Discrimination Test
-Version: 0.3.2
+Version: 1.0.4
 Author: Klaus Frieler
 Maintainer: Klaus Frieler <kf@omniversum.de>
-Description: Implementation of a musical  emotion discrimination test.
+Description: Implementation of a musical emotion discrimination test.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
     R (>= 3.5.0),
 Imports:
+    psychTestRCAT (>= 1.6.2),
     psychTestR (>= 2.21.2),
     shiny (>= 1.2.0),
     methods,
@@ -22,5 +23,7 @@ Imports:
 Suggests:
     codetools,
     devtools (>= 1.13.6)
-Remotes: pmcharrison/psychTestR
+Remotes: 
+    pmcharrison/psychTestR,
+    pmcharrison/psychTestRCAT
 RoxygenNote: 7.1.1

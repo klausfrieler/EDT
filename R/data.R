@@ -12,3 +12,9 @@ NULL
 #' @docType data
 NULL
 
+#' EDT2 (adaptive) item bank
+#'
+#' The EDT2's item bank
+#' @name EDT2_item_bank
+#' @docType data
+NULL

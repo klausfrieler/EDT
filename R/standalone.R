@@ -24,18 +24,24 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @param validate_id (Character scalar or closure) Function for validating IDs or string "auto" for default validation
 #' which means ID should consist only of  alphanumeric characters.
+#' @param adaptive (Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
+#' or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.
+#' @param take_training (Logical scalar) Whether to include the training phase. Defaults to FALSE
 #' @param ... Further arguments to be passed to \code{\link{EDT}()}.
 #' @export
+
 EDT_standalone  <- function(title = NULL,
                            num_items = 18L,
                            with_id = TRUE,
                            with_feedback = FALSE,
                            with_welcome = TRUE,
                            admin_password = "conifer",
-                           researcher_email = "longgold@gold.uc.ak",
+                           researcher_email = "longgoldstudy@gmail.com",
                            languages = c("en", "de", "ru", "nl"),
                            dict = EDT::EDT_dict,
                            validate_id = "auto",
+                           adaptive = TRUE,
+                           take_training = FALSE,
                            ...) {
   feedback <- NULL
   if(with_feedback) {
@@ -49,13 +55,20 @@ EDT_standalone  <- function(title = NULL,
                              button_text = psychTestR::i18n("CONTINUE"),
                              validate = validate_id),
         dict = dict),
-    if(with_welcome) EDT_welcome_page(dict = dict),
+    if(take_training) EDT::EDT(num_items = num_items,
+                                with_welcome =  FALSE,
+                                with_finish = FALSE,
+                                feedback = feedback,
+                                dict = dict,
+                               take_training = TRUE,
+                                ...),
+    if(with_welcome & !take_training) EDT_welcome_page(dict = dict),
     EDT::EDT(num_items = num_items,
-      with_welcome =  FALSE,
-      with_finish = FALSE,
-      feedback = feedback,
-      dict = dict,
-      ...),
+             with_welcome =  FALSE,
+             with_finish = FALSE,
+             feedback = feedback,
+             dict = dict,
+             ...),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
     EDT_final_page(dict = dict)
   )
