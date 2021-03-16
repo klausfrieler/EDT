@@ -7,7 +7,7 @@
 #' \dontrun{
 #' EDT_demo(feedback = EDT_feedback_with_score())}
 EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
-  psychTestR::new_timeline(
+    psychTestR::new_timeline(
       psychTestR::reactive_page(function(state, ...) {
         #browser()
         results <- psychTestR::get_results(state = state,
@@ -70,15 +70,16 @@ EDT_feedback_with_graph <- function(dict = EDT::EDT_dict) {
                                            add_session_info = FALSE) %>% as.list()
 
         #sum_score <- sum(purrr::map_lgl(results[[1]], function(x) x$correct))
-        #num_question <- length(results[[1]])
-        #perc_correct <- sum_score/num_question
         #printf("Sum scores: %d, total items: %d perc_correct: %.2f", sum_score, num_question, perc_correct)
-        num_correct <- round(results$EDT$score * results$EDT$num_questions)
+        num_question <- nrow(results)
+        if (is.null(results$EDT$score)) num_correct <- (results$EDT$ability + 4)/8
+        else num_correct <- round(results$EDT$score * results$EDT$num_questions)
+        perc_correct <- num_correct/num_question
         text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
-                                        sub = list(num_question = results$EDT$num_questions,
+                                        sub = list(num_question = num_question,
                                                    num_correct = num_correct))
-        norm_plot <- EDT_feedback_graph_normal_curve(results$EDT$score)
+        norm_plot <- EDT_feedback_graph_normal_curve(perc_correct)
         psychTestR::page(
           ui = shiny::div(
             shiny::p(text_finish),

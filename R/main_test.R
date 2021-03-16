@@ -21,10 +21,11 @@ scoring <- function(){
 }
 
 get_eligible_first_items_EDT <- function(){
- which(EDT::EDT2_item_bank$difficulty >= -sd(EDT::EDT2_item_bank$difficulty)  &
-         EDT::EDT2_item_bank$difficulty <= sd(EDT::EDT2_item_bank$difficulty))
+  lower_sd <- mean(EDT::EDT2_item_bank$difficulty) - stats::sd(EDT::EDT2_item_bank$difficulty)
+  upper_sd <- mean(EDT::EDT2_item_bank$difficulty) + stats::sd(EDT::EDT2_item_bank$difficulty)
+ which(EDT::EDT2_item_bank$difficulty >= lower_sd  &
+         EDT::EDT2_item_bank$difficulty <= upper_sd)
 }
-
 
 main_test <- function(label,
                       num_items_in_test,

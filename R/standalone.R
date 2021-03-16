@@ -26,6 +26,7 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' which means ID should consist only of  alphanumeric characters.
 #' @param adaptive (Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
 #' or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.
+#' @param take_training (Logical scalar) Whether to include the training phase. Defaults to FALSE
 #' @param ... Further arguments to be passed to \code{\link{EDT}()}.
 #' @export
 
