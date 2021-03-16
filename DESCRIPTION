@@ -23,5 +23,7 @@ Imports:
 Suggests:
     codetools,
     devtools (>= 1.13.6)
-Remotes: pmcharrison/psychTestR
+Remotes: 
+    pmcharrison/psychTestR,
+    pmcharrison/psychTestRCAT
 RoxygenNote: 7.1.1
