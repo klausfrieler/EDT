@@ -78,7 +78,7 @@ EDT_feedback_with_graph <- function(dict = EDT::EDT_dict) {
 
         #sum_score <- sum(purrr::map_lgl(results[[1]], function(x) x$correct))
         #printf("Sum scores: %d, total items: %d perc_correct: %.2f", sum_score, num_question, perc_correct)
-        browser()
+        #browser()
         if (is.null(results$EDT$score)) {
           num_correct <- sum(attr(results$EDT$ability, "metadata")$results$score)
           num_question <- results$EDT$num_items
