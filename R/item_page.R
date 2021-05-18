@@ -93,7 +93,7 @@ audio_NAFC_page_flex <- function(label,
                                  prompt,
                                  choices,
                                  audio_url,
-                                 correct_answer = correct_answer,
+                                 correct_answer,
                                  adaptive = adaptive,
                                  save_answer = TRUE,
                                  get_answer = NULL,
@@ -119,11 +119,11 @@ audio_NAFC_page_flex <- function(label,
       validate <- function(answer, ...) !is.null(answer)
       }
     }
-  else {
-    get_answer <- function(input, ...) {
-      answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-      correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
-      tibble(answer = answer,
+    else {
+      get_answer <- function(input, ...) {
+        answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
+        correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
+        tibble(answer = answer,
              label = label,
              correct = correct)
     }
@@ -150,7 +150,6 @@ EDT_item <- function(label = "",
                      ){
 
   page_prompt <- shiny::div(prompt)
-
   choices <- c("1", "2")
   audio_url <- file.path(audio_dir, audio_file)
   audio_NAFC_page_flex(label = label,
