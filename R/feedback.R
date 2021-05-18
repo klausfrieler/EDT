@@ -6,6 +6,7 @@
 #' @examples
 #' \dontrun{
 #' EDT_demo(feedback = EDT_feedback_with_score())}
+
 EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
     psychTestR::new_timeline(
       psychTestR::reactive_page(function(state, ...) {
@@ -19,10 +20,10 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
 
         if (is.null(results$EDT$score)) {
           num_correct <- sum(attr(results$EDT$ability, "metadata")$results$score)
-          num_question <- results$EDT$num_question
+          num_question <- nrow(results)
         }
         else {
-          num_correct <- round(results$EDT$score * results$EDT$num_questions)
+          num_correct <- round(results$EDT$score * results$EDT$num_question)
           num_question <- nrow(results)
         }
         text_finish <- psychTestR::i18n("COMPLETED",

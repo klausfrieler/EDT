@@ -112,16 +112,14 @@ audio_NAFC_page_flex <- function(label,
                  id = "response_ui")
     )
   if (adaptive){
-  if(is.null(get_answer)){
-  get_answer <- function(input, ...) {
-    answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-  }
-  validate <- function(answer, ...) !is.null(answer)
-  psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,
-                     validate = validate, on_complete = on_complete, final = FALSE,
-                     admin_ui = admin_ui)
+    if(is.null(get_answer)){
+      get_answer <- function(input, ...) {
+        answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
+        }
+      validate <- function(answer, ...) !is.null(answer)
+      }
     }
-  else
+  else {
     get_answer <- function(input, ...) {
       answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
       correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
@@ -129,7 +127,13 @@ audio_NAFC_page_flex <- function(label,
              label = label,
              correct = correct)
     }
+    validate <- function(answer, ...) !is.null(answer)
   }
+  psychTestR::page(ui = ui, label = label,
+                   get_answer = get_answer, save_answer = save_answer,
+                   validate = validate, on_complete = on_complete,
+                   final = FALSE,
+                   admin_ui = admin_ui)
 }
 
 EDT_item <- function(label = "",
