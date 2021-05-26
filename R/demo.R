@@ -25,6 +25,7 @@ EDT_demo <- function(num_items = 3L,
                      researcher_email = "longgoldstudy@gmail.com",
                      dict = EDT::EDT_dict,
                      language = "en",
+                     adaptive = TRUE,
                      ...) {
   elts <- psychTestR::join(
     EDT_welcome_page(dict = dict),
@@ -32,6 +33,7 @@ EDT_demo <- function(num_items = 3L,
              with_welcome = FALSE,
              feedback = feedback,
              dict = dict,
+             adaptive = adaptive,
              ...),
       EDT_final_page(dict = dict)
   )

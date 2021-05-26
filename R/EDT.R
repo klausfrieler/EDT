@@ -15,7 +15,7 @@ library(psychTestRCAT)
 #' For demoing the EDT, consider using \code{\link{EDT_demo}()}.
 #' For a standalone implementation of the EDT,
 #' consider using \code{\link{EDT_standalone}()}.
-#' @param num_items_in_test (Integer scalar) Number of items in the test.
+#' @param num_items (Integer scalar) Number of items in the test.
 #' @param with_welcome (Scalar boolean) Indicates, if a welcome page shall be displayed. Defaults to TRUE
 #' @param take_training (Logical scalar) Whether to include the training phase. Defaults to FALSE
 #' @param with_finish (Scalar boolean) Indicates, if a finish (not final!) page shall be displayed. Defaults to TRUE
@@ -59,7 +59,7 @@ library(psychTestRCAT)
 #' We recommend leaving this option disabled.
 #' @export
 
-EDT <- function(num_items_in_test = 18L,
+EDT <- function(num_items = 18L,
                 with_welcome = TRUE,
                 take_training = FALSE,
                 with_finish = TRUE,
@@ -76,7 +76,7 @@ EDT <- function(num_items_in_test = 18L,
                 ) {
   audio_dir <- "https://media.gold-msi.org/test_materials/EDT"
   stopifnot(purrr::is_scalar_character(label),
-            purrr::is_scalar_integer(num_items_in_test) || purrr::is_scalar_double(num_items_in_test),
+            purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_character(audio_dir),
             psychTestR::is.timeline(feedback) ||
               is.list(feedback) ||
@@ -91,7 +91,7 @@ EDT <- function(num_items_in_test = 18L,
     if (with_welcome) EDT_welcome_page(),
     psychTestR::new_timeline(
       main_test(label = label,
-                num_items_in_test = num_items_in_test,
+                num_items = num_items,
                 audio_dir = audio_dir,
                 dict = dict,
                 next_item.criterion = next_item.criterion,

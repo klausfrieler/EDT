@@ -94,7 +94,7 @@ audio_NAFC_page_flex <- function(label,
                                  choices,
                                  audio_url,
                                  correct_answer,
-                                 adaptive = TRUE,
+                                 adaptive = adaptive,
                                  save_answer = TRUE,
                                  get_answer = NULL,
                                  on_complete = NULL,
@@ -115,13 +115,11 @@ audio_NAFC_page_flex <- function(label,
     if(is.null(get_answer)){
       get_answer <- function(input, ...) {
         answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-      }
+        }
       validate <- function(answer, ...) !is.null(answer)
-      psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,
-                     validate = validate, on_complete = on_complete, final = FALSE,
-                     admin_ui = admin_ui)
+      }
     }
-    else
+    else {
       get_answer <- function(input, ...) {
         answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
         correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
@@ -129,7 +127,13 @@ audio_NAFC_page_flex <- function(label,
              label = label,
              correct = correct)
     }
+    validate <- function(answer, ...) !is.null(answer)
   }
+  psychTestR::page(ui = ui, label = label,
+                   get_answer = get_answer, save_answer = save_answer,
+                   validate = validate, on_complete = on_complete,
+                   final = FALSE,
+                   admin_ui = admin_ui)
 }
 
 EDT_item <- function(label = "",
@@ -138,13 +142,12 @@ EDT_item <- function(label = "",
                      correct_answer,
                      prompt = "",
                      audio_dir = "",
-                     adaptive = TRUE,
+                     adaptive = adaptive,
                      save_answer = TRUE,
                      on_complete = NULL,
                      get_answer = NULL,
                      instruction_page = FALSE
                      ){
-
   page_prompt <- shiny::div(prompt)
   choices <- c("1", "2")
   audio_url <- file.path(audio_dir, audio_file)
