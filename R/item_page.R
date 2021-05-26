@@ -148,7 +148,6 @@ EDT_item <- function(label = "",
                      get_answer = NULL,
                      instruction_page = FALSE
                      ){
-
   page_prompt <- shiny::div(prompt)
   choices <- c("1", "2")
   audio_url <- file.path(audio_dir, audio_file)

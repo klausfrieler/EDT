@@ -27,7 +27,8 @@ show_sample_page <- function(audio_dir){
   audio <- get_audio_element(url = audio_url, autoplay = F)
   body <- shiny::div(
     shiny::div(psychTestR::i18n("SAMPLE1a"),
-               style = "text-align: justify; margin-left:20%; margin-right:20%"),
+               style = "text-align: justify; margin-left:20%;
+               margin-right:20%; margin-bottom:20px"),
     shiny::p(audio)
   )
   psychTestR::one_button_page(
@@ -43,7 +44,8 @@ show_second_sample_page <- function(audio_dir){
   audio <- get_audio_element(url = audio_url, autoplay = F)
   body <- shiny::div(
     shiny::div(psychTestR::i18n("SAMPLE1b"),
-               style = "text-align: justify; margin-left:20%; margin-right:20%"),
+               style = "text-align: justify; margin-left:20%;
+               margin-right:20%; margin-bottom:20px"),
     shiny::p(audio)
   )
   psychTestR::one_button_page(
