@@ -17,10 +17,9 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
         #sum_score <- sum(purrr::map_lgl(results[[1]], function(x) x$correct))
         #num_question <- length(results[[1]])
         #messagef("Sum scores: %d, total items: %d", sum_score, num_question)
-
         if (is.null(results$EDT$score)) {
           num_correct <- sum(attr(results$EDT$ability, "metadata")$results$score)
-          num_question <- nrow(results)
+          num_question <- nrow(attr(results$EDT$ability, "metadata")$results)
         }
         else {
           num_correct <- round(results$EDT$score * results$EDT$num_question)

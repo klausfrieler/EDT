@@ -150,7 +150,7 @@ show_item <- function(audio_dir) {
     item_number <- psychTestRCAT::get_item_number(item)
     num_items <- psychTestRCAT::get_num_items_in_test(item)
     emotion <- psychTestR::i18n(item[1,]$emotion_i18)
-    messagef("Showing item %s", item_number)
+    #messagef("Showing item %s, correct = %s", item_number, item$answer)
     EDT_item(
       label = paste0("q", item_number),
       emotion = emotion,

@@ -11,6 +11,7 @@ EDT_demo(
   researcher_email = "longgoldstudy@gmail.com",
   dict = EDT::EDT_dict,
   language = "en",
+  adaptive = TRUE,
   ...
 )
 }

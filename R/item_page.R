@@ -114,16 +114,17 @@ audio_NAFC_page_flex <- function(label,
   if (adaptive){
     if(is.null(get_answer)){
       get_answer <- function(input, ...) {
-        answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-        }
-      validate <- function(answer, ...) !is.null(answer)
+        as.numeric(gsub("answer", "", input$last_btn_pressed))
+
       }
+      validate <- function(answer, ...) !is.null(answer)
     }
-    else {
-      get_answer <- function(input, ...) {
-        answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-        correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
-        tibble(answer = answer,
+  }
+  else {
+    get_answer <- function(input, ...) {
+      answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
+      correct <- EDT::EDT_item_bank[EDT::EDT_item_bank$item_number == label,]$correct == answer
+      tibble(answer = answer,
              label = label,
              correct = correct)
     }

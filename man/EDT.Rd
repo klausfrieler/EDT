@@ -5,7 +5,7 @@
 \title{EDT}
 \usage{
 EDT(
-  num_items_in_test = 18L,
+  num_items = 18L,
   with_welcome = TRUE,
   take_training = FALSE,
   with_finish = TRUE,
@@ -22,7 +22,7 @@ EDT(
 )
 }
 \arguments{
-\item{num_items_in_test}{(Integer scalar) Number of items in the test.}
+\item{num_items}{(Integer scalar) Number of items in the test.}
 
 \item{with_welcome}{(Scalar boolean) Indicates, if a welcome page shall be displayed. Defaults to TRUE}
 

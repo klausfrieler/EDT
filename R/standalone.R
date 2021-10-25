@@ -73,6 +73,10 @@ EDT_standalone  <- function(title = NULL,
              adaptive = adaptive,
              ...),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
+    psychTestR::code_block(function(state, ...){
+      res <- get_results(state, complete = T)
+      #browser()
+    }),
     EDT_final_page(dict = dict)
   )
   if(is.null(title)){
