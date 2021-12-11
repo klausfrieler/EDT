@@ -3,5 +3,5 @@
 #' Lists the languages available for EDT implementations.
 #' @export
 EDT_languages <- function() {
-  c("en", "de", "ru", "nl" )
+  c("en", "de", "ru", "nl", "it" )
 }

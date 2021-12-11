@@ -19,7 +19,7 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param languages (Character vector)
 #' Determines the languages available to participants.
 #' Possible languages include English (\code{"en"}),
-#' German (\code{"de"}),  Russian (\code{"ru"}), and Nederlands (\code{"nl"}).
+#' German (\code{"de"}),  Russian (\code{"ru"}), Nederlands (\code{"nl"}), and Italiano ((\code{"it"}).
 #' The first language is selected by default
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @param validate_id (Character scalar or closure) Function for validating IDs or string "auto" for default validation
@@ -37,7 +37,7 @@ EDT_standalone  <- function(title = NULL,
                            with_welcome = TRUE,
                            admin_password = "conifer",
                            researcher_email = "longgoldstudy@gmail.com",
-                           languages = c("en", "de", "ru", "nl"),
+                           languages = c("en", "de", "ru", "nl", "it"),
                            dict = EDT::EDT_dict,
                            validate_id = "auto",
                            adaptive = TRUE,

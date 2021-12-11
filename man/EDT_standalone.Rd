@@ -12,7 +12,7 @@ EDT_standalone(
   with_welcome = TRUE,
   admin_password = "conifer",
   researcher_email = "longgoldstudy@gmail.com",
-  languages = c("en", "de", "ru", "nl"),
+  languages = c("en", "de", "ru", "nl", "it"),
   dict = EDT::EDT_dict,
   validate_id = "auto",
   adaptive = TRUE,
@@ -40,7 +40,7 @@ at the bottom of the screen so that online participants can ask for help.}
 \item{languages}{(Character vector)
 Determines the languages available to participants.
 Possible languages include English (\code{"en"}),
-German (\code{"de"}),  Russian (\code{"ru"}), and Nederlands (\code{"nl"}).
+German (\code{"de"}),  Russian (\code{"ru"}), Nederlands (\code{"nl"}), and Italiano ((\code{"it"}).
 The first language is selected by default}
 
 \item{dict}{The psychTestR dictionary used for internationalisation.}

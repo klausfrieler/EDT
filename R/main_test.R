@@ -115,7 +115,7 @@ EDT_welcome_page <- function(dict = EDT::EDT_dict){
     body = shiny::div(
       shiny::h4(psychTestR::i18n("WELCOME")),
       shiny::div(psychTestR::i18n("INTRO_TEXT"),
-               style = "margin-left:0%;display:block")
+               style = "margin-left:20%;margin-right:20%;width:60%;display:block;text-align:justify")
     ),
     button_text = psychTestR::i18n("CONTINUE")
   ), dict = dict)
