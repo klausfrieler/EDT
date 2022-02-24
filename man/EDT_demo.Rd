@@ -33,7 +33,7 @@ the email address of this package's developer.}
 \item{dict}{The psychTestR dictionary used for internationalisation.}
 
 \item{language}{The language you want to run your demo in.
-Possible languages include English (\code{"en"}), German (\code{"de"}), Russian (\code{"ru"}), Nederlands (\code{"nl"}), and Italiano (\code{"it"}).
+Possible languages include English (\code{"en"}), German (\code{"de"}), formal German (\code{"de_f"}), Russian (\code{"ru"}), Nederlands (\code{"nl"}), Espanol \code{"es"}, and Italiano (\code{"it"}).
 The first language is selected by default}
 
 \item{...}{Further arguments to be passed to \code{\link{EDT}()}.}
