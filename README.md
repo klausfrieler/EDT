@@ -1,7 +1,7 @@
-# Emotion Discrimination Test (EDT2)
+# Musical Emotion Discrimination Test (EDT)
 
 
-The EDT2 is an adaptive test for recognition of emotional interpretation of simple melodies. The EDT is the non-adaptive version which can still be used, but we highly encourage to use the new EDT2.
+The EDT package contains the adaptive Musical Emotion Discrimination Test (aMEDT), an adaptive test for recognition of emotional interpretation of simple melodies. It also contains also an non-adaptive version (sMEDT) which can still be used, but we highly encourage to use the adaptive version.
 
 
 ## Citation
@@ -53,7 +53,7 @@ EDT_demo(num_items = 5, language = "en")
 ### Testing a participant
 
 The `EDT_standalone()` function is designed for real data collection.
-In particular, the participant doesn't receive feedback during this version.
+In particular, the participant doesn't receive feedback during this version. Per default, the aMEDT is used. Setting the parameter `adaptive` to `FALSE` will run the  static version (sMEDT).
 
 ``` r
 # Load the EDT package
@@ -61,7 +61,8 @@ library(EDT)
 
 # Run the test as if for a participant, using default settings,
 # saving data, and with a custom admin password
-EDT_standalone(admin_password = "put-your-password-here")
+# set adaptive = FALSE for static version
+EDT_standalone(admin_password = "put-your-password-here", adaptive = TRUE) 
 ```
 
 You will need to enter a participant ID for each participant.
@@ -79,7 +80,7 @@ see http://psychtestr.com/.
 
 The EDT currently supports English (en), German (de), Russian (ru), and Nederlands (nl).
 You can select one of these languages by passing a language code as 
-an argument to `EDT_standalone()`, e.g. `EDT_standalone(languages = "de")`,
+an argument to `EDT_standalone()`, e.g., `EDT_standalone(languages = "de")`,
 or alternatively by passing it as a URL parameter to the test browser,
 eg. http://127.0.0.1:4412/?language=DE (note that the `p_id` argument must be empty).
 
@@ -123,12 +124,12 @@ where `shiny` is the username for the Shiny process user
 
 ## Implementation notes
 
-By default, the EDT  implementation always estimates participant abilities
+By default, the adaptive EDT  implementation always estimates participant abilities
 using weighted-likelihood estimation.
 We adopt weighted-likelihood estimation for this release 
 because this technique makes fewer assumptions about the participant group being tested.
 This makes the test better suited to testing with diverse participant groups
-(e.g. children, clinical populations).
+(e.g., children, clinical populations). The static version runs just a fixed sequence of 18 stimuli. Note that the output format of the adaptive and static variants will look rather differently.
 
 ## Usage notes
 
