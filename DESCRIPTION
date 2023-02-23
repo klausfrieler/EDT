@@ -1,7 +1,7 @@
 Package: EDT
 Type: Package
 Title: Emotion Discrimination Test
-Version: 1.2.1
+Version: 1.2.2
 Author: Klaus Frieler
 Maintainer: Klaus Frieler <kf@omniversum.de>
 Description: Implementation of a musical emotion discrimination test.
