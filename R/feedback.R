@@ -29,10 +29,11 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
                                         html = TRUE,
                                         sub = list(num_question = num_question,
                                                    num_correct = num_correct))
-        psychTestR::page(
-          ui = shiny::div(
+        psychTestR::one_button_page(
+          body= shiny::div(
             shiny::p(text_finish)
-          )
+          ),
+          button_text = "Continue"
         )
       }
       ),
