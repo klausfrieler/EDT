@@ -98,9 +98,10 @@ audio_NAFC_page_flex <- function(label,
                                  save_answer = TRUE,
                                  get_answer = NULL,
                                  on_complete = NULL,
+                                 autoplay = T,
                                  admin_ui = NULL) {
   stopifnot(purrr::is_scalar_character(label))
-  audio_ui <- get_audio_ui(audio_url, wait = T, loop = F, width = 200)
+  audio_ui <- get_audio_ui(audio_url, autoplay = autoplay, wait = T, loop = F, width = 200)
   style <- NULL
   ui <- shiny::div(
     tagify(prompt),
@@ -159,6 +160,7 @@ EDT_item <- function(label = "",
                        correct_answer = correct_answer,
                        save_answer = save_answer,
                        get_answer = get_answer,
+                       autoplay = !instruction_page,
                        on_complete = on_complete,
                        adaptive = adaptive)
 }

@@ -40,7 +40,7 @@ get_practice_page <- function(page_no, feedback, audio_dir){
                      audio_dir = audio_dir,
                      audio_file = sprintf("Demo-%s.mp3", page_no + 1),
                      save_answer = FALSE,
-                     instruction_page = FALSE,
+                     instruction_page = TRUE,
                      adaptive = TRUE)
   }
   page
