@@ -54,6 +54,8 @@ or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.}
 
 \item{take_training}{(Logical scalar) Whether to include the training phase. Defaults to FALSE}
 
+\item{autoplay}{(Scalar boolean) Indicates whether you want to have autoplay for item pages (instruction pages always not-autoplay)}
+
 \item{...}{Further arguments to be passed to \code{\link{EDT}()}.}
 }
 \description{

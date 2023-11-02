@@ -25,6 +25,7 @@ library(psychTestRCAT)
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @param adaptive (Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
 #' or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.
+#' @param autoplay (Scalar boolean) Indicates whether you want to have autoplay for item pages (instruction pages always not-autoplay)
 #' @param next_item.criterion (Character scalar)
 #' Criterion for selecting successive items in the adaptive test.
 #' See the \code{criterion} argument in \code{\link[catR]{nextItem}} for possible values.
@@ -67,7 +68,7 @@ EDT <- function(num_items = 18L,
                 feedback = EDT_feedback_with_score(),
                 dict = EDT::EDT_dict,
                 adaptive = TRUE,
-                autoplay = FALSE,
+                autoplay = TRUE,
                 next_item.criterion = "bOpt",
                 next_item.estimator = "BM",
                 next_item.prior_dist = "norm",

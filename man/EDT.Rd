@@ -13,7 +13,7 @@ EDT(
   feedback = EDT_feedback_with_score(),
   dict = EDT::EDT_dict,
   adaptive = TRUE,
-  autoplay = FALSE,
+  autoplay = TRUE,
   next_item.criterion = "bOpt",
   next_item.estimator = "BM",
   next_item.prior_dist = "norm",
@@ -40,6 +40,8 @@ at the end of the test.}
 
 \item{adaptive}{(Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
 or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.}
+
+\item{autoplay}{(Scalar boolean) Indicates whether you want to have autoplay for item pages (instruction pages always not-autoplay)}
 
 \item{next_item.criterion}{(Character scalar)
 Criterion for selecting successive items in the adaptive test.

@@ -98,7 +98,7 @@ audio_NAFC_page_flex <- function(label,
                                  save_answer = TRUE,
                                  get_answer = NULL,
                                  on_complete = NULL,
-                                 autoplay = T,
+                                 autoplay = TRUE,
                                  admin_ui = NULL) {
   stopifnot(purrr::is_scalar_character(label))
   audio_ui <- get_audio_ui(audio_url, autoplay = autoplay, wait = T, loop = F, width = 200)
