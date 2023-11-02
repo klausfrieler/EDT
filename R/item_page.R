@@ -148,11 +148,13 @@ EDT_item <- function(label = "",
                      save_answer = TRUE,
                      on_complete = NULL,
                      get_answer = NULL,
-                     instruction_page = FALSE
+                     instruction_page = FALSE,
+                     autoplay = TRUE
                      ){
   page_prompt <- shiny::div(prompt)
   choices <- c("1", "2")
   audio_url <- file.path(audio_dir, audio_file)
+  messagef("instruction_page = %s, autoplay = %s, !instruction_page && autoplay = %s", instruction_page, autoplay, !instruction_page || autoplay)
   audio_NAFC_page_flex(label = label,
                        prompt = page_prompt,
                        audio_url = audio_url,
@@ -160,7 +162,7 @@ EDT_item <- function(label = "",
                        correct_answer = correct_answer,
                        save_answer = save_answer,
                        get_answer = get_answer,
-                       autoplay = !instruction_page,
+                       autoplay = !instruction_page && autoplay,
                        on_complete = on_complete,
                        adaptive = adaptive)
 }

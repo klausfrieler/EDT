@@ -1,3 +1,7 @@
+# EDT 1.2.3
+
+Added autoplay parameter.
+
 # EDT 0.3.2
 
 Added Nederlands, fixed finish page.

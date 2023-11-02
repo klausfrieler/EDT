@@ -13,6 +13,7 @@ EDT(
   feedback = EDT_feedback_with_score(),
   dict = EDT::EDT_dict,
   adaptive = TRUE,
+  autoplay = FALSE,
   next_item.criterion = "bOpt",
   next_item.estimator = "BM",
   next_item.prior_dist = "norm",

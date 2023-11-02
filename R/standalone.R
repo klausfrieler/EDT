@@ -42,6 +42,7 @@ EDT_standalone  <- function(title = NULL,
                            validate_id = "auto",
                            adaptive = TRUE,
                            take_training = FALSE,
+                           autoplay = TRUE,
                            ...) {
   feedback <- NULL
   if(with_feedback) {
@@ -63,6 +64,7 @@ EDT_standalone  <- function(title = NULL,
                dict = dict,
                take_training = TRUE,
                adaptive = adaptive,
+               autoplay = autoplay,
                ...)
     else
       EDT::EDT(num_items = num_items,
@@ -71,6 +73,7 @@ EDT_standalone  <- function(title = NULL,
              feedback = feedback,
              dict = dict,
              adaptive = adaptive,
+             autoplay = autoplay,
              ...),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
     psychTestR::code_block(function(state, ...){

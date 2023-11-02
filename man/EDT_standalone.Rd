@@ -17,6 +17,7 @@ EDT_standalone(
   validate_id = "auto",
   adaptive = TRUE,
   take_training = FALSE,
+  autoplay = TRUE,
   ...
 )
 }

@@ -35,13 +35,15 @@ main_test <- function(label,
                       next_item.prior_dist,
                       next_item.prior_par,
                       final_ability.estimator,
-                      constrain_answers, ...) {
+                      constrain_answers,
+                      autoplay = TRUE,
+                      ...) {
   if(adaptive) {
     item_bank <- EDT::EDT2_item_bank
     psychTestRCAT::adapt_test(
       label = label,
       item_bank = item_bank,
-      show_item = show_item(audio_dir),
+      show_item = show_item(audio_dir, autoplay),
       stopping_rule = psychTestRCAT::stopping_rule.num_items(n = num_items),
       opt = EDT_options(next_item.criterion = next_item.criterion,
                         next_item.estimator = next_item.estimator,
@@ -67,14 +69,15 @@ main_test <- function(label,
                             audio_file = item$audio_file[1],
                             audio_dir = audio_dir,
                             save_answer = TRUE,
-                            adaptive = adaptive)
+                            adaptive = adaptive,
+                            autoplay = autoplay)
       elts <- psychTestR::join(elts, item_page)
     }
     elts
   }
 }
 
-item_page <- function(item_number, item_id, num_items, audio_dir,
+item_page <- function(item_number, item_id, num_items, audio_dir, autoplay,
                       dict = EDT::EDT_dict) {
   item <- EDT::EDT_item_bank %>% filter(item_number == item_id) %>% as.data.frame()
   emotion <- psychTestR::i18n(item[1,]$emotion_i18)
@@ -83,6 +86,7 @@ item_page <- function(item_number, item_id, num_items, audio_dir,
            prompt = get_prompt(item_number, num_items, emotion),
            audio_file = item$audio_file[1],
            audio_dir = audio_dir,
+           autoplay = autoplay,
            save_answer = TRUE)
   #psychTestR::audio_NAFC_page(label = sprintf("%s-%s", item_number, num_items_in_test),
   #                promp = get_prompt(item_number, num_items_in_test, emotion),
@@ -144,7 +148,7 @@ EDT_final_page <- function(dict = EDT::EDT_dict){
     ), dict = dict)
 }
 
-show_item <- function(audio_dir) {
+show_item <- function(audio_dir, autoplay) {
   function(item, ...) {
     #stopifnot(is(item, "item"), nrow(item) == 1L)
     item_number <- psychTestRCAT::get_item_number(item)
@@ -162,7 +166,8 @@ show_item <- function(audio_dir) {
       save_answer = TRUE,
       get_answer = NULL,
       on_complete = NULL,
-      instruction_page = FALSE
+      instruction_page = FALSE,
+      autoplay = autoplay
     )
   }
 }
