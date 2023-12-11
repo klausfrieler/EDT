@@ -27,6 +27,7 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param adaptive (Scalar boolean) Indicates whether you want to use the adaptive EDT2 (TRUE)
 #' or the non-adaptive EDT (FASLE). Default is adaptive = TRUE.
 #' @param take_training (Logical scalar) Whether to include the training phase. Defaults to FALSE
+#' @param autoplay (Scalar boolean) Indicates whether you want to have autoplay for item pages (instruction pages always not-autoplay)
 #' @param ... Further arguments to be passed to \code{\link{EDT}()}.
 #' @export
 
@@ -37,7 +38,7 @@ EDT_standalone  <- function(title = NULL,
                            with_welcome = TRUE,
                            admin_password = "conifer",
                            researcher_email = "longgoldstudy@gmail.com",
-                           languages = c("en", "de", "de_f", "ru", "nl", "it", "es"),
+                           languages = c("en", "de", "de_f", "ru", "nl", "it", "es", "zh_cn"),
                            dict = EDT::EDT_dict,
                            validate_id = "auto",
                            adaptive = TRUE,
@@ -82,6 +83,7 @@ EDT_standalone  <- function(title = NULL,
     }),
     EDT_final_page(dict = dict)
   )
+  browser()
   if(is.null(title)){
     #extract title as named vector from dictionary
     title <-
@@ -91,7 +93,7 @@ EDT_standalone  <- function(title = NULL,
       dplyr::select(-key) %>%
       as.list() %>%
       unlist()
-    names(title) <- tolower(names(title))
+    names(title) <- tolower(names(title)) %>% str_replace("zh.cn", "zh_cn")
   }
 
   psychTestR::make_test(

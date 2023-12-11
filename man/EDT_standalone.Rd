@@ -12,7 +12,7 @@ EDT_standalone(
   with_welcome = TRUE,
   admin_password = "conifer",
   researcher_email = "longgoldstudy@gmail.com",
-  languages = c("en", "de", "de_f", "ru", "nl", "it", "es"),
+  languages = c("en", "de", "de_f", "ru", "nl", "it", "es", "zh_cn"),
   dict = EDT::EDT_dict,
   validate_id = "auto",
   adaptive = TRUE,
