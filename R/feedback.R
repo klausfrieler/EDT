@@ -33,7 +33,7 @@ EDT_feedback_with_score <- function(dict = EDT::EDT_dict) {
           body= shiny::div(
             shiny::p(text_finish)
           ),
-          button_text = "Continue"
+          button_text = psychTestR::i18n("CONTINUE")
         )
       }
       ),

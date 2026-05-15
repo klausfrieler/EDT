@@ -92,7 +92,7 @@ EDT_standalone  <- function(title = NULL,
       dplyr::select(-key) %>%
       as.list() %>%
       unlist()
-    names(title) <- tolower(names(title)) %>% str_replace("zh.cn", "zh_cn")
+    names(title) <- tolower(names(title)) %>% stringr::str_replace("zh.cn", "zh_cn")
   }
 
   psychTestR::make_test(
