@@ -17,6 +17,7 @@ ask_repeat <- function(prompt) {
 make_practice_page <- function(page_no, audio_dir) {
   psychTestR::reactive_page(function(answer, ...) {
     correct <- "INCORRECT"
+    #browser()
     if (page_no > 1 && answer == training_answers[page_no-1]) correct <- "CORRECT"
     feedback <- psychTestR::i18n(correct)
     get_practice_page(page_no, feedback, audio_dir)
